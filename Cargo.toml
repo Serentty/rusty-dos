@@ -1,0 +1,17 @@
+[package]
+name = "dos"
+version = "0.1.0"
+authors = ["Serentty"]
+edition = "2018"
+build = "build.rs"
+
+[dependencies]
+rusty-asm = "0.2"
+bitflags = "1.0"
+sjis-literals = { path = "sjis-literals" }
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"

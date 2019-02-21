@@ -1,0 +1,7 @@
+== Building ==
+
+You can compile this with the following command.
+
+```
+RUSTFLAGS="-C opt-level=z -C relocation-model=static" cargo xbuild --release --target dos.json
+```

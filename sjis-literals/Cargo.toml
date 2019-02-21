@@ -1,0 +1,12 @@
+[package]
+name = "sjis-literals"
+version = "0.1.0"
+authors = ["Serentty"]
+edition = "2018"
+
+[lib]
+proc-macro = true
+
+[dependencies]
+syn = "0.15"
+encoding_rs = "0.8"
