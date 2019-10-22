@@ -1,6 +1,8 @@
 Rusty DOS
 =========
 
+A Rust skeleton for an MS-DOS program for IBM compatibles and the PC-98, including some PC-98-specific functionality.
+
 Building
 --------
 
