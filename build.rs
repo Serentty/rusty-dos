@@ -1,10 +1,9 @@
 use std::env;
-use std::fs::File;
-use std::io::Write;
-use std::path::PathBuf;
+use std::fs;
+use std::path::Path;
 
 fn main() {
-    let out_dir = PathBuf::from(env::var_os("OUT_DIR").unwrap());
-    File::create(out_dir.join("com.ld")).unwrap().write_all(include_bytes!("com.ld")).unwrap();
-    File::create(out_dir.join("startup.o")).unwrap().write_all(include_bytes!("startup.o")).unwrap();
+    let out_dir = env::var("OUT_DIR").unwrap();
+    fs::copy("com.ld", Path::new(&out_dir).join("com.ld"));
+    fs::copy("startup.o", Path::new(&out_dir).join("startup.o"));
 }
