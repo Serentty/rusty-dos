@@ -11,5 +11,5 @@ mod opn;
 
 #[no_mangle]
 pub extern "C" fn start() {
-    io::write(b"Hello, world!");
+    print!(b"Hello, world!");
 }

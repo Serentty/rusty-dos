@@ -5,3 +5,8 @@ pub fn write(bytes: &[u8]) {
         dos::print_character(byte);
     }
 }
+
+#[macro_export]
+macro_rules! print {
+    ($($arg:tt)*) => ($crate::io::write($($arg)*));
+}
