@@ -12,3 +12,5 @@ It requires the nightly toolchain, which can be installed with [rustup](https://
 ```
 RUSTFLAGS="-C opt-level=z -C relocation-model=static" cargo xbuild --release --target dos.json
 ```
+
+It seems that this won't build properly with MSVC's linker. Using GCC instead should fix this.
