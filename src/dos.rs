@@ -1,77 +1,58 @@
-use rusty_asm::rusty_asm;
-
 pub fn print(s: *const u8) {
     unsafe {
-        rusty_asm! {
-            let ptr: in("{dx}") = s;
-            clobber("ah");
-            clobber("al");
-            asm("volatile", "intel") {
-                "mov ah, 09h
-                int 21h"
-            }
-        }
+        asm!(
+            "int 21h",
+            inout("ax") 0x0900 => _,
+            in("dx") s,
+        );
     }
 }
 
 pub fn print_character(c: u8) {
     unsafe {
-        rusty_asm! {
-            let byte: in("{dl}") = c;
-            clobber("ah");
-            clobber("al");
-            asm("volatile", "intel") {
-                "mov ah, 02h
-                int 21h"
-            }
-        }
+        asm!(
+            "int 21h",
+            inout("ax") 0x0200 => _,
+            in("dl") c,
+        );
     }
 }
 
 pub fn get_keyboard_input() -> u8 {
+    let code;
     unsafe {
-        rusty_asm! {
-            let code: out("{ax}");
-            asm("volatile", "intel") {
-                "mov  ah,01h
-                 int  16h
-                 jz   empty
-                 mov  ah,00h
-                 int  16h
-                 mov  al,ah
-
-                 xor  ah,ah
-                 jmp  done
-                 
-                 empty:
-                    xor ax,ax
-                 done:"
-            }
-            return code;
-        }
+        asm!(
+            "mov ah, 01h",
+            "int 16h",
+            "jz empty",
+            "mov ah, 00h",
+            "int 16h",
+            "mov al, ah",
+            "xor ah, ah",
+            "jmp done",
+            "empty:",
+            "xor ax, ax",
+            "done:",
+            out("al") code,
+        );
     }
+    code
 }
 
-pub fn set_video_mode(m: u8) {
+pub fn set_video_mode(mode: u8) {
     unsafe {
-        rusty_asm! {
-            let mode: in("{al}") = m as u8;
-            clobber("ax");
-            asm("volatile", "intel") {
-                "mov ah, 0
-                int 10h"
-            }
-        }
+        asm!(
+            "int 10h",
+            inout("ax") mode as u16 => _,
+        );
     }
 }
 
 pub fn exit() {
     unsafe {
-        rusty_asm! {
-            asm("volatile", "intel") {
-                "mov ah, 4Ch
-                int 21h"
-            }
-        }
+        asm!(
+            "int 21h",
+            inout("ax") 0x4C00 => _,
+        );
     }
 }
