@@ -8,6 +8,7 @@ build = "build.rs"
 [dependencies]
 bitflags = "1.0"
 sjis-literals = { path = "sjis-literals" }
+static_assertions = "1.1.0"
 
 [profile.dev]
 panic = "abort"

@@ -1,3 +1,5 @@
+use core::arch::asm;
+
 pub fn random() -> u16 {
     let value;
     unsafe {

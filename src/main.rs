@@ -1,10 +1,10 @@
 #![feature(proc_macro_hygiene)]
-#![feature(asm)]
 #![no_main]
 #![no_std]
 
 mod dos;
 mod panic;
+mod text;
 mod io;
 mod port;
 mod opn;
@@ -30,5 +30,6 @@ pub unsafe extern "C" fn start() {
     }
 
     dos::set_video_mode(0x03);
-    print!(b"Thanks for trying Rusty DOS!");
+
+    print!("Thanks for trying Rusty DOS! Nöw with CP437 support for languagés!");
 }

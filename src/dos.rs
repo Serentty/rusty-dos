@@ -1,3 +1,5 @@
+use core::arch::asm;
+
 pub fn print(s: *const u8) {
     unsafe {
         asm!(
@@ -24,15 +26,15 @@ pub fn get_keyboard_input() -> u8 {
         asm!(
             "mov ah, 01h",
             "int 16h",
-            "jz empty",
+            "jz 1f",
             "mov ah, 00h",
             "int 16h",
             "mov al, ah",
             "xor ah, ah",
-            "jmp done",
-            "empty:",
+            "jmp 2f",
+            "1:",
             "xor ax, ax",
-            "done:",
+            "2:",
             out("al") code,
         );
     }

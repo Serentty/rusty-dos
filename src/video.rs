@@ -1,3 +1,5 @@
+use core::arch::asm;
+
 pub fn fill_screen(color: u8) {
     unsafe {
         asm!(
